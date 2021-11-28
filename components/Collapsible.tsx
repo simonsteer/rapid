@@ -41,9 +41,7 @@ export function Collapsible(props: CollapsibleProps) {
   }
 
   const CollapsibleComponent =
-    open !== undefined && onChange !== undefined
-      ? ControlledCollapsible
-      : SelfContainedCollapsible
+    open !== undefined ? ControlledCollapsible : SelfContainedCollapsible
 
   return (
     <motion.div
@@ -147,7 +145,7 @@ function RenderedDisclosure({
             <motion.div
               layout="position"
               className={hideOverflow ? 'overflow-hidden' : undefined}
-              transition={{ ease: 'easeOut' }}
+              transition={{ ease: 'easeOut', duration: 0.2 }}
               animate={{ opacity: 1, height: 'auto' }}
               initial={{ opacity: 0, height: 0 }}
               exit={{ opacity: 0, height: 0 }}

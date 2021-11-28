@@ -27,7 +27,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <AnimateSharedLayout>
         <AnimatePresence exitBeforeEnter>
-          <motion.main key={router.asPath} {...PRESENCE_MOTION_PROPS}>
+          <motion.main
+            className="bg-gray-900 min-h-screen w-screen"
+            key={router.asPath}
+            {...PRESENCE_MOTION_PROPS}
+          >
             <Component {...pageProps} />
           </motion.main>
         </AnimatePresence>

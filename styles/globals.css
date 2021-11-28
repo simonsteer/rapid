@@ -1,7 +1,7 @@
 @font-face {
-  font-family: 'Source Code Pro Regular';
-  src: url(/SourceCodePro-Regular.woff);
-  font-weight: 400;
+  font-family: 'Saol';
+  src: url(/SaolText-Monospaced.otf);
+  font-weight: 500;
   font-style: normal;
 }
 
@@ -11,22 +11,17 @@ html {
 
 html,
 body {
-  font-family: 'Source Code Pro Regular', sans-serif;
+  font-family: 'Saol', serif;
   padding: 0;
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
   -moz-font-feature-settings: 'kern' 1;
   -ms-font-feature-settings: 'kern' 1;
   -o-font-feature-settings: 'kern' 1;
   -webkit-font-feature-settings: 'kern' 1;
   font-feature-settings: 'kern' 1;
   font-kerning: normal;
-}
-
-body {
-  background-color: lightyellow;
 }
 
 a {
