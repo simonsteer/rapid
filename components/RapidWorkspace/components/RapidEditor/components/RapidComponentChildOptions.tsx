@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { List } from 'components'
-import { VALID_TAG_DESCENDANTS } from '../constants'
-import { RapidElementNode, RapidElementTag } from '../types'
+import { VALID_TAG_DESCENDANTS } from '../../../constants'
+import { RapidElementNode, RapidElementTag } from '../../../types'
 import { Collapsing } from './Collapsing'
 
 export function RapidComponentChildOptions({

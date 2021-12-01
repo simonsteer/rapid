@@ -8,6 +8,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@gadget-client/envoy": "^1.5.0",
+    "@gadgetinc/react": "^0.2.3",
     "@reach/alert-dialog": "^0.16.0",
     "@reach/dialog": "^0.16.0",
     "@reach/disclosure": "^0.16.0",

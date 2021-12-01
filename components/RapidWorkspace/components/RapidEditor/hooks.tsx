@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext, useState } from 'react'
 import u from 'updeep'
-import { DEFAULT_COMPONENT_TREE } from './constants'
-import { RapidElementNode } from './types'
+import { DEFAULT_COMPONENT_TREE } from '../../constants'
+import { RapidElementNode } from '../../types'
 
 const RapidEditorContext = createContext<{
   component: RapidElementNode

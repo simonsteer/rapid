@@ -10,7 +10,7 @@ import { AppState, AppStateContextType, AppStatePatch } from 'types'
 
 const DEFAULT_APP_STATE: AppState = {
   modal: null,
-  count: 0,
+  user: null,
 }
 
 const AppStateContext = createContext<AppStateContextType>({

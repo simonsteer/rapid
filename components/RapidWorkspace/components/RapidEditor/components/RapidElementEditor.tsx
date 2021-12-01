@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import classNames from 'classnames'
-import { RapidElementNode } from '../types'
+import { RapidElementNode } from '../../../types'
 import { Separator } from '../Separator'
 import { Collapsing, FreeText, RapidComponentChildOptions } from '.'
 import { RapidComponentPropertyLabel } from './RapidComponentPropertyLabel'

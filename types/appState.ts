@@ -1,8 +1,9 @@
 import { Modal } from './modals'
+import { User } from '@gadget-client/envoy'
 
 export type AppState = {
   modal: null | Modal
-  count: number
+  user: null | User
 }
 
 export type AppStatePatch =

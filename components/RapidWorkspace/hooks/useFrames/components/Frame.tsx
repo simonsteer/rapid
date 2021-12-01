@@ -15,10 +15,8 @@ import { FrameTitleButton } from './FrameTitleButton'
 import { ResizeHandleProps, FrameProps, HandlePan } from '../types'
 import { CLOSED_HEIGHT, TITLE_HEIGHT } from '../constants'
 import { getContentHeight, getContentWidth } from '../utils'
-import { useMapMotionValue } from '../hooks'
+import { useMapMotionValue } from '../../useMapMotionValue'
 import classNames from 'classnames'
-
-const MotionDisclosureButton = motion(DisclosureButton)
 
 export function Frame({
   children,

@@ -4,6 +4,8 @@ import { Frame } from './components'
 import { DEFAULT_WINDOW_CONFIG } from './constants'
 import { FrameChild } from './types'
 
+export default useFrames
+
 export function useFrames(
   dragConstraints: NonNullable<DraggableProps['dragConstraints']>,
   initialFrames = [] as FrameChild[]

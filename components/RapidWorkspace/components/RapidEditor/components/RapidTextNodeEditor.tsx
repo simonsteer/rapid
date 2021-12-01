@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useRef } from 'react'
 import classNames from 'classnames'
-import { RapidTextNode } from '../types'
+import { RapidTextNode } from '../../../types'
 import { FreeText, Collapsing } from '.'
 
 export function RapidTextNodeEditor({

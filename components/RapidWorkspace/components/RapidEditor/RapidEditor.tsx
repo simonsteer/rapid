@@ -1,5 +1,5 @@
 import { RapidElementEditor, RapidTextNodeEditor } from './components'
-import { RapidElementNode, RapidTextNode } from './types'
+import { RapidElementNode, RapidTextNode } from '../../types'
 import { RapidEditorProvider, useRapidEditor } from './hooks'
 
 export function RapidEditor({

@@ -4,7 +4,11 @@ import React, {
   useMemo,
   useState,
 } from 'react'
-import { RapidElementNode, RapidElementTag, RapidTextNode } from '../types'
+import {
+  RapidElementNode,
+  RapidElementTag,
+  RapidTextNode,
+} from '../../../types'
 
 export function RapidComponentPreview({
   component,

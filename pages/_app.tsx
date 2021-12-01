@@ -1,13 +1,12 @@
+import { AppStateProvider } from 'hooks'
+import { ModalRouter } from 'components'
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion'
 import type { AppProps } from 'next/app'
-import { useRouter } from 'next/dist/client/router'
 import Head from 'next/head'
+import { useRouter } from 'next/dist/client/router'
 
 import 'tailwindcss/tailwind.css'
 import 'styles/globals.css'
-
-import { AppStateProvider } from 'hooks'
-import { ModalRouter } from 'components'
 
 const PRESENCE_MOTION_PROPS = {
   initial: { opacity: 0 },
@@ -40,4 +39,5 @@ function MyApp({ Component, pageProps }: AppProps) {
     </AppStateProvider>
   )
 }
+
 export default MyApp
