@@ -22,3 +22,17 @@ export type RapidTextNode = {
   type: 'text'
   data: { text: string }
 }
+
+export type RapidNode = RapidElementNode | RapidTextNode
+
+export type NormalizedElementNode = {
+  [K in keyof RapidElementNode]: K extends 'data'
+    ? {
+        [P in keyof RapidElementNode['data']]: P extends 'children'
+          ? string[]
+          : RapidElementNode['data'][P]
+      }
+    : RapidElementNode[K]
+}
+
+export type NormalizedNode = RapidTextNode | NormalizedElementNode

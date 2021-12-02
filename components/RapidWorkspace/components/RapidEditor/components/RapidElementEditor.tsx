@@ -1,22 +1,19 @@
 import { useState } from 'react'
 import classNames from 'classnames'
-import { RapidElementNode } from '../../../types'
+import { NormalizedElementNode, RapidElementNode } from '../../../types'
 import { Separator } from '../Separator'
 import { Collapsing, FreeText, RapidComponentChildOptions } from '.'
 import { RapidComponentPropertyLabel } from './RapidComponentPropertyLabel'
 import { RapidEditor } from '../RapidEditor'
+import { useRapidTreeLeaf, useUpdateRapidNode } from '..'
 
-export function RapidElementEditor({
-  component,
-  root,
-}: {
-  component: RapidElementNode
-  root?: boolean
-}) {
+export function RapidElementEditor({ id }: { id: string }) {
+  const root = id === 'root'
+  const component = useRapidTreeLeaf(id) as NormalizedElementNode
+  const update = useUpdateRapidNode()
+
   const [open, setOpen] = useState(false)
   const cssInputId = `${component.id}-css`
-
-  const { children, css, tag } = component.data
 
   return (
     <div className={classNames('w-full', root ? 'my-0.5' : 'mt-1.5')}>
@@ -29,7 +26,7 @@ export function RapidElementEditor({
           )}
           onClick={() => setOpen(!open)}
         >
-          {`<${tag}>`}
+          {`<${component.data.tag}>`}
         </button>
         {root && (
           <span className="absolute left-full top-0 text-xs pl-2 text-blue-500">
@@ -53,8 +50,8 @@ export function RapidElementEditor({
             >
               <FreeText
                 name={cssInputId}
-                value={css}
-                setValue={console.log}
+                value={component.data.css}
+                setValue={css => update(id, { data: { css } })}
                 placeholder="write css rules for this element here"
                 className="border-l my-1"
               />
@@ -68,13 +65,10 @@ export function RapidElementEditor({
                 />
               )}
             >
-              {children.map(child => (
-                <RapidEditor component={child} key={child.id} />
+              {component.data.children.map(childId => (
+                <RapidEditor id={childId} key={childId} />
               ))}
-              <RapidComponentChildOptions
-                component={component}
-                onClickTag={console.log}
-              />
+              <RapidComponentChildOptions id={id} onClickTag={console.log} />
             </Collapsing>
           </div>
         </div>

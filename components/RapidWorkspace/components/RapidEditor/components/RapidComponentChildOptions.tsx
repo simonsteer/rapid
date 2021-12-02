@@ -1,16 +1,22 @@
 import classNames from 'classnames'
 import { List } from 'components'
+import { useRapidTreeLeaf } from '..'
 import { VALID_TAG_DESCENDANTS } from '../../../constants'
-import { RapidElementNode, RapidElementTag } from '../../../types'
+import {
+  NormalizedElementNode,
+  RapidElementNode,
+  RapidElementTag,
+} from '../../../types'
 import { Collapsing } from './Collapsing'
 
 export function RapidComponentChildOptions({
-  component,
+  id,
   onClickTag,
 }: {
-  component: RapidElementNode
+  id: string
   onClickTag: (tag: RapidElementTag | 'text') => void
 }) {
+  const component = useRapidTreeLeaf(id) as NormalizedElementNode
   const tags = VALID_TAG_DESCENDANTS[component.data.tag]
 
   return (

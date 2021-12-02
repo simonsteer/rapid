@@ -1,21 +1,15 @@
-import React, {
-  ReactComponentElement,
-  ReactNode,
-  useMemo,
-  useState,
-} from 'react'
-import {
-  RapidElementNode,
-  RapidElementTag,
-  RapidTextNode,
-} from '../../../types'
+import React, { Fragment, useMemo } from 'react'
+import { RapidElementNode } from 'components/RapidWorkspace/types'
+import { useRapidComponent } from '../context'
 
-export function RapidComponentPreview({
-  component,
-}: {
-  component: RapidElementNode
-}) {
-  const css = useMemo(() => getElementCss(component), [component])
+function useComponentCss(node: RapidElementNode) {
+  const css = getElementCss(node)
+  return useMemo(() => css, [css])
+}
+
+export function RapidComponentPreview() {
+  const component = useRapidComponent()
+  const css = useComponentCss(component)
   const preview = <RapidElementNodePreview component={component} />
 
   return (
@@ -43,9 +37,9 @@ function RapidElementNodePreview({
     children: children.map(child => {
       switch (child.type) {
         case 'element':
-          return <RapidElementNodePreview component={child} />
+          return <RapidElementNodePreview component={child} key={child.id} />
         case 'text':
-          return child.data.text
+          return <Fragment key={child.id}>{child.data.text}</Fragment>
         default:
           return null
       }

@@ -1,18 +1,12 @@
-import { Dispatch, SetStateAction, useRef } from 'react'
 import classNames from 'classnames'
 import { RapidTextNode } from '../../../types'
 import { FreeText, Collapsing } from '.'
+import { useRapidTreeLeaf, useUpdateRapidNode } from '..'
 
-export function RapidTextNodeEditor({
-  component,
-  text,
-  setText,
-}: {
-  component: RapidTextNode
-  text: string
-  setText: Dispatch<SetStateAction<string>>
-}) {
-  const inputId = `${component.id}-text`
+export function RapidTextNodeEditor({ id }: { id: string }) {
+  const component = useRapidTreeLeaf(id) as RapidTextNode
+  const update = useUpdateRapidNode()
+  const inputId = `${component}-text`
 
   return (
     <div className="w-full flex items-start mt-2.5">
@@ -32,8 +26,8 @@ export function RapidTextNodeEditor({
         <div className="ml-2.5 flex-1">
           <FreeText
             name={inputId}
-            value={text}
-            setValue={setText}
+            value={component.data.text}
+            setValue={text => update(component.id, { data: { text } })}
             placeholder="write something!"
             className="mb-0"
           />

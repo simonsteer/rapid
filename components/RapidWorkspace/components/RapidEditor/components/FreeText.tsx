@@ -11,7 +11,7 @@ export function FreeText({
   style,
 }: {
   value: string
-  setValue: Dispatch<SetStateAction<string>>
+  setValue: (val: string) => void
   name: string
   placeholder?: string
   className?: string
