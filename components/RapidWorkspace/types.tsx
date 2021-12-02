@@ -33,6 +33,10 @@ export type NormalizedElementNode = {
           : RapidElementNode['data'][P]
       }
     : RapidElementNode[K]
-}
+} & { parent: string | null }
 
-export type NormalizedNode = RapidTextNode | NormalizedElementNode
+export type NormalizedNode =
+  | (RapidTextNode & {
+      parent: string | null
+    })
+  | NormalizedElementNode

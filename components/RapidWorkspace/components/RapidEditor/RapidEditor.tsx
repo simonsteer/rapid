@@ -4,6 +4,7 @@ import { useRapidTreeLeaf } from '.'
 
 export function RapidEditor({ id }: { id: string }) {
   const component = useRapidTreeLeaf(id)
+
   switch (component.type) {
     case 'element':
       return <RapidElementEditor id={id} />
