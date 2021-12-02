@@ -1,6 +1,6 @@
-import { RapidElementEditor, RapidTextNodeEditor } from './components'
-import { RapidElementNode, RapidTextNode } from '../../types'
-import { useRapidTreeLeaf } from '.'
+import { useRapidTreeLeaf } from './context'
+import { RapidElementEditor } from './RapidElementEditor'
+import { RapidTextNodeEditor } from './RapidTextNodeEditor'
 
 export function RapidEditor({ id }: { id: string }) {
   const component = useRapidTreeLeaf(id)

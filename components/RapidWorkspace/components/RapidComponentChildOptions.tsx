@@ -1,8 +1,8 @@
 import classNames from 'classnames'
 import { List } from 'components'
-import { useRapidEditor, useRapidTreeLeaf } from '../context'
-import { VALID_TAG_DESCENDANTS } from '../../../constants'
-import { NormalizedElementNode, RapidElementTag } from '../../../types'
+import { useRapidEditor, useRapidTreeLeaf } from './context'
+import { VALID_TAG_DESCENDANTS } from '../constants'
+import { NormalizedElementNode, RapidElementTag } from '../types'
 import { Collapsing } from './Collapsing'
 
 export function RapidComponentChildOptions({ id }: { id: string }) {

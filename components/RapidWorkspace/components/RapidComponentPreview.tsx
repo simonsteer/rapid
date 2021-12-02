@@ -1,6 +1,6 @@
 import React, { Fragment, useMemo } from 'react'
 import { RapidElementNode } from 'components/RapidWorkspace/types'
-import { useRapidComponent } from '../context'
+import { useRapidComponent } from './context'
 
 function useComponentCss(node: RapidElementNode) {
   const css = getElementCss(node)
@@ -32,9 +32,11 @@ function RapidElementNodePreview({
     id,
   } = component
 
-  return React.createElement(tag, {
+  const props: { [key: string]: any } = {
     className: css.trim().length ? `rapid-${id}` : undefined,
-    children: children.map(child => {
+  }
+  if (tag !== 'img') {
+    props.children = children.map(child => {
       switch (child.type) {
         case 'element':
           return <RapidElementNodePreview component={child} key={child.id} />
@@ -43,8 +45,10 @@ function RapidElementNodePreview({
         default:
           return null
       }
-    }),
-  })
+    })
+  }
+
+  return React.createElement(tag, props)
 }
 
 function getElementCss(root: RapidElementNode): string {

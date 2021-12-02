@@ -8,17 +8,17 @@ import {
 } from './components'
 import { RapidElementNode } from './types'
 
-export default Rapid
+export default RapidWorkspace
 
-export function Rapid({ component }: { component: RapidElementNode }) {
+export function RapidWorkspace({ component }: { component: RapidElementNode }) {
   return (
     <RapidEditorProvider component={component}>
-      <RapidWorkspace />
+      <Rapid />
     </RapidEditorProvider>
   )
 }
 
-export function RapidWorkspace() {
+export function Rapid() {
   const component = useRapidComponent()
 
   const ref = useRef<HTMLDivElement>(null)

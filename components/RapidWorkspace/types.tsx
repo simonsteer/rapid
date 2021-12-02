@@ -14,6 +14,7 @@ export type RapidElementNode = {
     tag: RapidElementTag
     css: string
     children: (RapidElementNode | RapidTextNode)[]
+    attrs: { [key: string]: any }
   }
 }
 

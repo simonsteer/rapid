@@ -53,11 +53,13 @@ export const DEFAULT_COMPONENT_TREE: RapidElementNode = {
   data: {
     tag: 'div',
     css: DEFAULT_CSS,
+    attrs: {},
     children: [
       {
         id: uuid(),
         type: 'element',
         data: {
+          attrs: {},
           tag: 'p',
           css: '',
           children: [

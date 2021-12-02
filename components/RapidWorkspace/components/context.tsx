@@ -51,6 +51,7 @@ export function RapidEditorProvider({
     setTree(u({ [nodeId]: u(patch, tree[nodeId] as R) }, tree))
   }
 
+  // NEEDS TESTING
   function reparentNode(nodeId: string, parentId: string) {
     const target = tree[nodeId]
     if (!target) {
@@ -76,13 +77,13 @@ export function RapidEditorProvider({
           [prevParent.id]: {
             data: {
               children: prevParent.data.children.filter(
-                child => child !== nodeId // remove child from its current parent
+                child => child !== nodeId // remove child reference from its current parent
               ),
             },
           },
           [nextParent.id]: {
             data: {
-              children: nextParent.data.children.concat(nodeId), // add child to its new parent
+              children: nextParent.data.children.concat(nodeId), // add child reference to its new parent
             },
           },
         },
@@ -115,7 +116,7 @@ export function RapidEditorProvider({
         id: uuid(),
         parent: parentId,
         type: 'element',
-        data: { tag, children: [], css: '' },
+        data: { tag, children: [], css: '', attrs: {} },
       }
     }
 

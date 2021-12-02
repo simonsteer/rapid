@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import classNames from 'classnames'
-import { NormalizedElementNode } from '../../../types'
-import { Separator } from '../Separator'
-import { Collapsing, FreeText, RapidComponentChildOptions } from '.'
+import { NormalizedElementNode } from '../types'
+import { Separator } from './Separator'
+import { Collapsing } from './Collapsing'
+import { FreeText } from './FreeText'
+import { RapidComponentChildOptions } from './RapidComponentChildOptions'
 import { RapidComponentPropertyLabel } from './RapidComponentPropertyLabel'
-import { RapidEditor } from '../RapidEditor'
-import { useRapidTreeLeaf, useUpdateRapidNode } from '..'
+import { RapidEditor } from './RapidEditor'
+import { useRapidTreeLeaf, useUpdateRapidNode } from './context'
 
 export function RapidElementEditor({ id }: { id: string }) {
   const root = id === 'root'
@@ -68,7 +70,7 @@ export function RapidElementEditor({ id }: { id: string }) {
               {component.data.children.map(childId => (
                 <RapidEditor id={childId} key={childId} />
               ))}
-              <RapidComponentChildOptions id={id} onClickTag={console.log} />
+              <RapidComponentChildOptions id={id} />
             </Collapsing>
           </div>
         </div>
