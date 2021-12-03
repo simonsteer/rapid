@@ -1,13 +1,13 @@
 import classNames from 'classnames'
 import { List } from 'components'
-import { useRapidEditor, useRapidTreeLeaf } from './context'
+import { useRapidEditor, useRapidTreeNode } from './context'
 import { VALID_TAG_DESCENDANTS } from '../constants'
 import { NormalizedElementNode, RapidElementTag } from '../types'
 import { Collapsing } from './Collapsing'
 
 export function RapidComponentChildOptions({ id }: { id: string }) {
   const { insertNode } = useRapidEditor()
-  const component = useRapidTreeLeaf(id) as NormalizedElementNode
+  const component = useRapidTreeNode(id) as NormalizedElementNode
   const tags = VALID_TAG_DESCENDANTS[component.data.tag]
 
   return (

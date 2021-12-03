@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import { motion } from 'framer-motion'
 import { ReactNode, useState } from 'react'
 import { useDeleteRapidNode } from '.'
-import { useRapidTreeLeaf } from './context'
+import { useRapidTreeNode } from './context'
 import { RapidElementEditor } from './RapidElementEditor'
 import { RapidTextNodeEditor } from './RapidTextNodeEditor'
 
@@ -18,7 +18,7 @@ export function RapidEditor({
   const [variant, setVariant] = useState<EditorVariant>('initial')
   const variantToRender = outerVariant === 'hovering' ? outerVariant : variant
 
-  const component = useRapidTreeLeaf(id)
+  const component = useRapidTreeNode(id)
   const deleteNode = useDeleteRapidNode()
 
   let children: ReactNode

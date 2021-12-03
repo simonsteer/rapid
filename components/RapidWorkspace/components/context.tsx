@@ -138,10 +138,8 @@ export function useDeleteRapidNode() {
   return useRapidEditor().deleteNode
 }
 
-export function useRapidTreeLeaf<Id extends string>(id: Id) {
-  return useRapidEditor().tree[id] as Id extends 'root'
-    ? NormalizedElementNode
-    : NormalizedNode
+export function useRapidTreeNode(id: string) {
+  return useRapidEditor().tree[id]
 }
 
 function normalizeRapidElement(

@@ -1,12 +1,12 @@
 import classNames from 'classnames'
 import { FreeText } from './FreeText'
 import { Collapsing } from './Collapsing'
-import { useRapidTreeLeaf, useUpdateRapidNode } from './context'
+import { useRapidTreeNode, useUpdateRapidNode } from './context'
 import { RapidTextNode } from '../types'
 import { EditorVariant } from '.'
 
 export function RapidTextNodeEditor({ id }: { id: string }) {
-  const component = useRapidTreeLeaf(id) as RapidTextNode
+  const component = useRapidTreeNode(id) as RapidTextNode
   const update = useUpdateRapidNode()
   const inputId = `${component}-text`
 

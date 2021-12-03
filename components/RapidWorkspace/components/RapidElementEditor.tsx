@@ -7,7 +7,7 @@ import { FreeText } from './FreeText'
 import { RapidComponentChildOptions } from './RapidComponentChildOptions'
 import { RapidComponentPropertyLabel } from './RapidComponentPropertyLabel'
 import { RapidEditor, EditorVariant } from './RapidEditor'
-import { useRapidTreeLeaf, useUpdateRapidNode } from './context'
+import { useRapidTreeNode, useUpdateRapidNode } from './context'
 
 export function RapidElementEditor({
   id,
@@ -17,7 +17,7 @@ export function RapidElementEditor({
   outerVariant?: EditorVariant
 }) {
   const root = id === 'root'
-  const component = useRapidTreeLeaf(id) as NormalizedElementNode
+  const component = useRapidTreeNode(id) as NormalizedElementNode
   const update = useUpdateRapidNode()
 
   const cssInputId = `${component.id}-css`
