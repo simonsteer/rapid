@@ -6,7 +6,7 @@ import { Collapsing } from './Collapsing'
 import { FreeText } from './FreeText'
 import { RapidComponentChildOptions } from './RapidComponentChildOptions'
 import { RapidComponentPropertyLabel } from './RapidComponentPropertyLabel'
-import { InnerRapidEditor, EditorVariant } from './RapidEditor'
+import { RapidEditor, EditorVariant } from './RapidEditor'
 import { useRapidTreeLeaf, useUpdateRapidNode } from './context'
 
 export function RapidElementEditor({
@@ -74,7 +74,7 @@ export function RapidElementEditor({
               )}
             >
               {component.data.children.map(childId => (
-                <InnerRapidEditor
+                <RapidEditor
                   outerVariant={outerVariant}
                   id={childId}
                   key={childId}

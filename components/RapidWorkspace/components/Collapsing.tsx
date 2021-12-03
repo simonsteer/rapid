@@ -3,7 +3,7 @@ import { Dispatch, ReactNode, SetStateAction, useState } from 'react'
 export function Collapsing({
   children,
   title,
-  startOpen = false,
+  startOpen = true,
 }: {
   startOpen?: boolean
   children: ReactNode

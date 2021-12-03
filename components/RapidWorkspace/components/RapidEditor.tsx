@@ -1,12 +1,6 @@
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
-import {
-  createContext,
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  useState,
-} from 'react'
+import { ReactNode, useState } from 'react'
 import { useDeleteRapidNode } from '.'
 import { useRapidTreeLeaf } from './context'
 import { RapidElementEditor } from './RapidElementEditor'
@@ -14,25 +8,7 @@ import { RapidTextNodeEditor } from './RapidTextNodeEditor'
 
 export type EditorVariant = 'initial' | 'hovering'
 
-const VariantContext = createContext<
-  [string, Dispatch<SetStateAction<EditorVariant>>]
->(['initial', () => {}])
-
-const VariantProvider = ({ children }: { children: ReactNode }) => (
-  <VariantContext.Provider value={useState<EditorVariant>('initial')}>
-    {children}
-  </VariantContext.Provider>
-)
-
-export function RapidEditor({ id }: { id: string }) {
-  return (
-    <VariantProvider>
-      <InnerRapidEditor id={id} />
-    </VariantProvider>
-  )
-}
-
-export function InnerRapidEditor({
+export function RapidEditor({
   id,
   outerVariant,
 }: {
