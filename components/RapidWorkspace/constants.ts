@@ -1,5 +1,6 @@
 import { v4 as uuid } from 'uuid'
-import { RapidElementNode, RapidElementTag } from './types'
+import { RapidElementNode } from './types'
+import { createTagMap, ALL_TAGS } from './utils'
 
 export const DEFAULT_CSS = `$ {
   background: #efefef;
@@ -15,37 +16,28 @@ $ > p {
   line-height: 1.15;
 }`
 
-const ALL_TAGS: RapidElementTag[] = [
-  'a',
-  'button',
-  'div',
-  'h1',
-  'h2',
-  'h3',
-  'h4',
-  'h5',
-  'h6',
-  'img',
-  'p',
-  'video',
-]
+export const VALID_TAG_DESCENDANTS = createTagMap(tag => {
+  switch (tag) {
+    case 'a':
+      return ALL_TAGS.filter(t => t !== 'a' && t !== 'button')
+    case 'button':
+      return ALL_TAGS.filter(t => t !== 'a' && t !== 'button')
+    case 'p':
+      return ALL_TAGS.filter(t => t !== 'p' && t !== 'div')
+    case 'img':
+    case 'video':
+      return []
+    default:
+      return ALL_TAGS
+  }
+})
 
-export const VALID_TAG_DESCENDANTS: {
-  [Tag in RapidElementTag]: RapidElementTag[]
-} = {
-  a: ALL_TAGS.filter(t => t !== 'a' && t !== 'button'),
-  button: ALL_TAGS.filter(t => t !== 'a' && t !== 'button'),
-  p: ALL_TAGS.filter(t => t !== 'p'),
-  div: ALL_TAGS,
-  h1: ALL_TAGS,
-  h2: ALL_TAGS,
-  h3: ALL_TAGS,
-  h4: ALL_TAGS,
-  h5: ALL_TAGS,
-  h6: ALL_TAGS,
-  img: [],
-  video: [],
-}
+export const REQUIRED_TAG_ATTRS = createTagMap(tag => {
+  switch (tag) {
+    default:
+      return []
+  }
+})
 
 export const DEFAULT_COMPONENT_TREE: RapidElementNode = {
   id: uuid(),

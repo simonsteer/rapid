@@ -17,8 +17,8 @@ export function RapidComponentChildOptions({ id }: { id: string }) {
           <button
             onClick={() => setIsOpen(!isOpen)}
             className={classNames(
-              'px-2 py-0.5 rounded-md bg-white border border-gray-300 self-start hover:bg-gray-100 transition-colors',
-              isOpen ? 'bg-gray-100' : 'bg-white'
+              'px-2 py-0.5 self-start rounded-md border border-gray-300 bg-white hover:bg-gray-100 transition-colors',
+              isOpen && 'bg-gray-100'
             )}
           >
             {isOpen ? '-' : '+'}

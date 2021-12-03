@@ -9,6 +9,7 @@ import {
 } from 'components/RapidWorkspace/types'
 import u from 'updeep'
 import { v4 as uuid } from 'uuid'
+import omit from 'lodash.omit'
 import { DEFAULT_COMPONENT_TREE } from 'components/RapidWorkspace/constants'
 
 type RapidEditorTree = {
@@ -20,7 +21,6 @@ const RapidEditorContext = createContext<{
   component: RapidElementNode
   tree: RapidEditorTree
   update<R extends RapidNode>(nodeId: string, patch: DeepPartial<R>): void
-  reparentNode(nodeId: string, parentId: string): void
   deleteNode(nodeId: string): void
   insertNode(nodeId: string, tag: RapidElementTag | 'text'): void
 }>({
@@ -28,7 +28,6 @@ const RapidEditorContext = createContext<{
     console.log('empty update fn')
   },
   insertNode() {},
-  reparentNode() {},
   deleteNode() {},
   component: DEFAULT_COMPONENT_TREE,
   tree: { root: null as any },
@@ -51,55 +50,25 @@ export function RapidEditorProvider({
     setTree(u({ [nodeId]: u(patch, tree[nodeId] as R) }, tree))
   }
 
-  // NEEDS TESTING
-  function reparentNode(nodeId: string, parentId: string) {
+  function deleteNode(nodeId: string) {
     const target = tree[nodeId]
-    if (!target) {
-      console.log('unable to find target with id ' + nodeId)
-      return
-    }
+    const parentId = target.parent === tree.root.id ? 'root' : target.parent!
+    const targetParent = tree[parentId] as NormalizedElementNode
 
-    // target.parent cannot be null here since we cannot reparent the root element, which is the only node where target.parent would be null.
-    // text nodes cannot be parents, so the parents *must* be as NormalizedElementNode(s)
-    const prevParent = tree[target.parent!] as NormalizedElementNode
-    const nextParent = tree[parentId] as NormalizedElementNode
-    if (!prevParent || !nextParent) {
-      console.log(
-        'unable to find both prev/next parents for target with id ' + nodeId
-      )
-      return
-    }
+    if (!target || !targetParent) return
 
     setTree(
       u(
         {
-          [target.id]: { parent: parentId }, // set the child's new parent
-          [prevParent.id]: {
+          [parentId]: {
             data: {
-              children: prevParent.data.children.filter(
-                child => child !== nodeId // remove child reference from its current parent
-              ),
-            },
-          },
-          [nextParent.id]: {
-            data: {
-              children: nextParent.data.children.concat(nodeId), // add child reference to its new parent
+              children: targetParent.data.children.filter(c => c !== nodeId),
             },
           },
         },
-        tree
+        omit(tree, [nodeId]) as RapidEditorTree
       )
     )
-  }
-
-  function deleteNode(nodeId: string) {
-    const target = tree[nodeId]
-    const nextTree = { ...tree }
-    if (target.type === 'element') {
-      target.data.children.forEach(childId => delete nextTree[childId])
-    }
-    delete nextTree[nodeId]
-    setTree(nextTree)
   }
 
   function insertNode(parentId: string, tag: RapidElementTag | 'text') {
@@ -144,7 +113,6 @@ export function RapidEditorProvider({
         update,
         tree,
         insertNode,
-        reparentNode,
         deleteNode,
       }}
     >
@@ -164,6 +132,10 @@ export function useUpdateRapidNode() {
 
 export function useRapidComponent() {
   return useRapidEditor().component
+}
+
+export function useDeleteRapidNode() {
+  return useRapidEditor().deleteNode
 }
 
 export function useRapidTreeLeaf<Id extends string>(id: Id) {

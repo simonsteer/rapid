@@ -3,6 +3,7 @@ import { FreeText } from './FreeText'
 import { Collapsing } from './Collapsing'
 import { useRapidTreeLeaf, useUpdateRapidNode } from './context'
 import { RapidTextNode } from '../types'
+import { EditorVariant } from '.'
 
 export function RapidTextNodeEditor({ id }: { id: string }) {
   const component = useRapidTreeLeaf(id) as RapidTextNode
@@ -10,7 +11,7 @@ export function RapidTextNodeEditor({ id }: { id: string }) {
   const inputId = `${component}-text`
 
   return (
-    <div className="w-full flex items-start mt-2.5">
+    <div className="w-full flex items-start pb-1 pt-1.5">
       <Collapsing
         title={(isOpen, setIsOpen) => (
           <button

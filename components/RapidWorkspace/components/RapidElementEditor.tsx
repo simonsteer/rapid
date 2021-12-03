@@ -6,10 +6,16 @@ import { Collapsing } from './Collapsing'
 import { FreeText } from './FreeText'
 import { RapidComponentChildOptions } from './RapidComponentChildOptions'
 import { RapidComponentPropertyLabel } from './RapidComponentPropertyLabel'
-import { RapidEditor } from './RapidEditor'
+import { InnerRapidEditor, EditorVariant } from './RapidEditor'
 import { useRapidTreeLeaf, useUpdateRapidNode } from './context'
 
-export function RapidElementEditor({ id }: { id: string }) {
+export function RapidElementEditor({
+  id,
+  outerVariant,
+}: {
+  id: string
+  outerVariant?: EditorVariant
+}) {
   const root = id === 'root'
   const component = useRapidTreeLeaf(id) as NormalizedElementNode
   const update = useUpdateRapidNode()
@@ -18,7 +24,7 @@ export function RapidElementEditor({ id }: { id: string }) {
   const cssInputId = `${component.id}-css`
 
   return (
-    <div className={classNames('w-full', root ? 'my-0.5' : 'mt-1.5')}>
+    <div className={classNames('w-full', root ? 'my-0.5' : 'my-1.5')}>
       <div className={classNames('max-w-max relative', !root && '-ml-6')}>
         <button
           className={classNames(
@@ -68,7 +74,11 @@ export function RapidElementEditor({ id }: { id: string }) {
               )}
             >
               {component.data.children.map(childId => (
-                <RapidEditor id={childId} key={childId} />
+                <InnerRapidEditor
+                  outerVariant={outerVariant}
+                  id={childId}
+                  key={childId}
+                />
               ))}
               <RapidComponentChildOptions id={id} />
             </Collapsing>
