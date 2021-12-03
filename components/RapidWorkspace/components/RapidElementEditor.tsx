@@ -20,29 +20,31 @@ export function RapidElementEditor({
   const component = useRapidTreeLeaf(id) as NormalizedElementNode
   const update = useUpdateRapidNode()
 
-  const [open, setOpen] = useState(false)
   const cssInputId = `${component.id}-css`
 
   return (
     <div className={classNames('w-full', root ? 'my-0.5' : 'my-1.5')}>
-      <div className={classNames('max-w-max relative', !root && '-ml-6')}>
-        <button
-          className={classNames(
-            'px-2 py-0.5 bg-white transition-colors hover:bg-gray-100 border border-gray-300 rounded-md',
-            open ? 'bg-gray-100' : 'bg-white',
-            root ? 'ml-0.5' : 'ml-6'
-          )}
-          onClick={() => setOpen(!open)}
-        >
-          {`<${component.data.tag}>`}
-        </button>
-        {root && (
-          <span className="absolute left-full top-0 text-xs pl-2 text-blue-500">
-            root
-          </span>
+      <Collapsing
+        title={(isOpen, setIsOpen) => (
+          <div className={classNames('max-w-max relative', !root && '-ml-6')}>
+            <button
+              className={classNames(
+                'px-2 py-0.5 bg-white transition-colors hover:bg-gray-100 border border-gray-300 rounded-md',
+                isOpen ? 'bg-gray-100' : 'bg-white',
+                root ? 'ml-0.5' : 'ml-6'
+              )}
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {`<${component.data.tag}>`}
+            </button>
+            {root && (
+              <span className="absolute left-full top-0 text-xs pl-2 text-blue-500">
+                root
+              </span>
+            )}
+          </div>
         )}
-      </div>
-      {open && (
+      >
         <div className="pl-3.5 mt-2 flex">
           <Separator className="mr-2.5" />
           <div className="flex flex-col w-full">
@@ -84,7 +86,7 @@ export function RapidElementEditor({
             </Collapsing>
           </div>
         </div>
-      )}
+      </Collapsing>
     </div>
   )
 }
