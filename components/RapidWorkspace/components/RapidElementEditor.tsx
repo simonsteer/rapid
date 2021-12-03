@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import classNames from 'classnames'
 import { NormalizedElementNode } from '../types'
 import { Separator } from './Separator'

@@ -1,25 +1,12 @@
-import React, { Fragment, useMemo } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { RapidElementNode } from 'components/RapidWorkspace/types'
 import { useRapidComponent } from './context'
 
-function useComponentCss(node: RapidElementNode) {
-  const css = getElementCss(node)
-  return useMemo(() => css, [css])
-}
-
 export function RapidComponentPreview() {
   const component = useRapidComponent()
-  const css = useComponentCss(component)
-  const preview = <RapidElementNodePreview component={component} />
+  useGlobalStyle(component.id, getElementCss(component))
 
-  return (
-    <>
-      {preview}
-      <style jsx global>
-        {css}
-      </style>
-    </>
-  )
+  return <RapidElementNodePreview component={component} />
 }
 
 function RapidElementNodePreview({
@@ -49,6 +36,20 @@ function RapidElementNodePreview({
   }
 
   return React.createElement(tag, props)
+}
+
+// injects style tag into the <head> of the current document and replaces the css when it changes
+function useGlobalStyle(nodeId: string, css: string) {
+  const styleTagId = `rapid-style-${nodeId}`
+
+  useEffect(() => {
+    const style = document.createElement('style')
+    style.setAttribute('id', styleTagId)
+    style.append(css)
+    document.head.append(style)
+
+    return () => document.querySelector(`style#${styleTagId}`)?.remove()
+  }, [nodeId, css])
 }
 
 function getElementCss(root: RapidElementNode): string {
