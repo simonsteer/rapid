@@ -52,6 +52,7 @@ function useGlobalStyle(nodeId: string, css: string) {
   }, [nodeId, css])
 }
 
+// concats root node and all subnode css templates into a single string
 function getElementCss(root: RapidElementNode): string {
   return root.data.children.reduce((css, child) => {
     switch (child.type) {

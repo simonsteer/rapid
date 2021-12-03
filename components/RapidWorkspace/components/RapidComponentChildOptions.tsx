@@ -13,6 +13,7 @@ export function RapidComponentChildOptions({ id }: { id: string }) {
   return (
     <div className="flex mt-2.5">
       <Collapsing
+        startOpen={false}
         title={(isOpen, setIsOpen) => (
           <button
             onClick={() => setIsOpen(!isOpen)}
